@@ -12,6 +12,8 @@ dependencies:
 - optparse-generic
 - aeson
 - generic-aeson
+- time
+- either
 
 default-extensions:
 - OverloadedStrings
