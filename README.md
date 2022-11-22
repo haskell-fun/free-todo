@@ -1,3 +1,5 @@
+[![CI](https://github.com/haskell-fun/free-todo/actions/workflows/ci.yml/badge.svg)](https://github.com/haskell-fun/free-todo/actions/workflows/ci.yml)
+
 # free-todo
 
 ## How to build and run locally
