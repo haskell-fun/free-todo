@@ -1,0 +1,14 @@
+cradle:
+  stack:
+    - path: "./src"
+      component: "free-todo:lib"
+
+    - path: "./app/Main.hs"
+      component: "free-todo:exe:free-todo-exe"
+
+    - path: "./app/Paths_free-todo.hs"
+      component: "free-todo:exe:free-todo-exe"
+
+    - path: "./test"
+      component: "free-todo:test:free-todo-test"
+
