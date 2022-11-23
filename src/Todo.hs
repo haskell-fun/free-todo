@@ -1,7 +1,8 @@
+{-# LANGUAGE GADTs #-}
 module Todo where
 import Data.Time
 import Data.Either.Combinators (maybeToRight)
-
+import Data.Map
 
 newtype DueDate = DueDate UTCTime deriving (Eq,Show,Ord)
 
@@ -31,30 +32,53 @@ parse now = undefined
 parseDate :: String -> Maybe UTCTime
 parseDate = undefined
 
--- fmap :: Functor f => (a -> b) -> f a -> f b 
+-- monade e' un monoide nella categoria degli (endo) functors 
+data Free f a = Done a | Free f (Free f a) 
+data List a = Nil | Cons a (List a) 
 
-defaultNow :: UTCTime
-defaultNow = undefined 
+data Action = Persist Todo | Render Error  | GetCurrentTime (UTCTime -> Action)  
+
+data Actions = 
+  QueryDb (AccountId -> Map CustomerId Roles -> Actions)  | 
+  Publish Message  | 
+  Done 
+
+data Scenario = Partnership | LandlordRefund | Landlord 
 
 
-data Action = Persist Todo | Render Error   
-data SourceAction  = GetCurrentTime 
+reduceDimensionality :: Map CustomerId Roles -> Scenario 
+reduceDimensionality = undefined
 
-runSource :: SourceAction -> IO UTCTime
-runSource GetCurrentTime = getCurrentTime
+data Message = NoBoth 
+
+lambda :: AccountId -> Amount -> [Actions] 
+lamda accountId _ =  QueryDb (\ accountId -> (\ roles -> 
+   case checkScenario role 
+   if isPartnership roles then 
+      Publish NoBoth 
+   else 
+      Done 
+))
 
 run :: Action -> IO () 
 run (Persist t) = persist t 
 run (Render e) = render e 
+run (GetCurrentTime f) = getCurrentTime >>= run . f 
 
-
-program' :: Input -> Action 
+program' :: Input -> Action
 program' input = 
-   case parse defaultNow input of 
-     Right todo -> Persist todo 
-     Left e -> Render e 
+   GetCurrentTime (\ now -> 
+    case parse now input of 
+     Right todo -> Persist todo  
+     Left e -> Render e )
 
 program :: Input -> IO ()
 program = run . program' 
 
+program'' :: Input -> IO ()
+program'' input = 
+   getCurrentTime >>= (\ now -> 
+    case parse now input of 
+     Right todo -> persist todo  
+     Left e -> render e )
 
