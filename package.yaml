@@ -13,6 +13,7 @@ dependencies:
 - aeson
 - generic-aeson
 - time
+- iso8601-time
 - either
 
 default-extensions:
