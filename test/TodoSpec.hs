@@ -1,16 +1,19 @@
 module TodoSpec where
 
-import App
 import Test.Hspec
 import Test.Hspec.QuickCheck
 import Test.QuickCheck.Property
+import Test.QuickCheck
+import Test.QuickCheck.Instances ()
+import Todo
+
 
 spec :: Spec
-spec = describe "Simple test" $ do
+spec = describe "parse" $ do
 
      it "example-based unit test" $
         1 `shouldBe` 1
 
-     prop "property-based unit test" $
-        \l -> reverse ( reverse l ) == ( l::[Int])
+     prop "do something" $
+        \d n -> parse n (Input "" d) == Left DescriptionEmpty
 

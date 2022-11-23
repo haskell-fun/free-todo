@@ -50,11 +50,11 @@ tests:
     - -with-rtsopts=-N
     dependencies:
     - free-todo
+    - quickcheck-instances
     - hspec
     - hspec-discover
     - QuickCheck
     - neat-interpolation
-
 
 verbatim:
   cabal-version: 3.0

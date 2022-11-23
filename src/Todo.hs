@@ -1,4 +1,4 @@
-module Todo (program, program', Todo, Input, parse) where
+module Todo (program, program', Todo(..), Input(..), Error(..), parse) where
 import Data.Time ( getCurrentTime, UTCTime )
 import Data.Map ()
 import Data.List.NonEmpty ( NonEmpty, nonEmpty )
