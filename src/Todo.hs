@@ -32,33 +32,7 @@ parse now = undefined
 parseDate :: String -> Maybe UTCTime
 parseDate = undefined
 
--- monade e' un monoide nella categoria degli (endo) functors 
-data Free f a = Done a | Free f (Free f a) 
-data List a = Nil | Cons a (List a) 
-
 data Action = Persist Todo | Render Error  | GetCurrentTime (UTCTime -> Action)  
-
-data Actions = 
-  QueryDb (AccountId -> Map CustomerId Roles -> Actions)  | 
-  Publish Message  | 
-  Done 
-
-data Scenario = Partnership | LandlordRefund | Landlord 
-
-
-reduceDimensionality :: Map CustomerId Roles -> Scenario 
-reduceDimensionality = undefined
-
-data Message = NoBoth 
-
-lambda :: AccountId -> Amount -> [Actions] 
-lamda accountId _ =  QueryDb (\ accountId -> (\ roles -> 
-   case checkScenario role 
-   if isPartnership roles then 
-      Publish NoBoth 
-   else 
-      Done 
-))
 
 run :: Action -> IO () 
 run (Persist t) = persist t 
@@ -75,8 +49,8 @@ program' input =
 program :: Input -> IO ()
 program = run . program' 
 
-program'' :: Input -> IO ()
-program'' input = 
+original :: Input -> IO ()
+original input = 
    getCurrentTime >>= (\ now -> 
     case parse now input of 
      Right todo -> persist todo  
