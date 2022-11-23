@@ -1,4 +1,4 @@
-[![CI](https://github.com/haskell-fun/free-todo/actions/workflows/ci.yml/badge.svg)](https://github.com/haskell-fun/free-todo/actions/workflows/ci.yml)
+[![CI](https://github.com/haskell-fun/free-todo/actions/workflows/ci.yml/badge.svg)](https://github.com/haskell-fun/free-todo/actions/workflows/ci.yml) [![codecov](https://codecov.io/gh/haskell-fun/free-todo/branch/main/graph/badge.svg?token=RKQJMC05A8)](https://codecov.io/gh/haskell-fun/free-todo)
 
 # free-todo
 
